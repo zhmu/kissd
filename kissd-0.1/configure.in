@@ -1,0 +1,29 @@
+AC_INIT(src/kissd.c)
+
+AM_INIT_AUTOMAKE(kissd,0.1)
+AM_CONFIG_HEADER(src/config.h)
+AC_PROG_CC
+AC_SUBST(CC)
+
+dnl POSIX thread (pthread) checking
+AC_CHECK_HEADER(pthread.h,,AC_MSG_ERROR([*** POSIX thread support unavailable - please install first ***]))
+PTHREAD_LIB=error
+AC_CHECK_LIB(pthread, pthread_create,PTHREAD_LIB="-lpthread")
+if test "$PTHREAD_LIB" = error; then
+	AC_CHECK_LIB(pthreads, pthread_create,PTHREAD_LIB="-lpthreads")
+fi
+if test "$PTHREAD_LIB" = error; then
+	AC_CHECK_LIB(c_r, pthread_create,PTHREAD_LIB="-lc_r")
+fi
+if test "$PTHREAD_LIB" = error; then
+	AC_CHECK_FUNC(pthread_create,PTHREAD_LIB="")
+fi
+if test "$PTHREAD_LIB" = error; then
+	AC_ERROR([*** Can't locate usable pthread library ***])
+fi
+AC_SUBST(PTHREAD_LIB)
+
+dnl File traversal services (fts) checking
+AC_CHECK_HEADERS(fts.h)
+
+AC_OUTPUT(Makefile src/Makefile)

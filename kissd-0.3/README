@@ -1,0 +1,11 @@
+KiSSd is a daemon which understands KiSS DP-500 (and probably others)
+DVD/DivX/VCD/MP3 player networking commands, which are used to play
+content from a remote server.
+
+It is written in an attempt to create a clean, dependancy-free server
+with decent performance. It only needs an OS that supports POSIX threads,
+which is about any modern *NIX operating system.
+
+The code should be very understandable, as well as educate you how to write
+network communication code using POSIX threads. The auto{conf,make} files
+may be useful as well, they were mildly inspired by xmms' configure.in.

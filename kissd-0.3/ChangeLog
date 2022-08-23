@@ -1,0 +1,21 @@
+Version 0.3
+
+- Added subtitles (srt) to the list of acceptable extensions.
+- The daemon is now displayable; can be disabled using the -D option.
+- Removed an incredibly dumb bug which would cause filed with multiple dots in
+  their filename never to be accepted (due to missing strchr -> strrchr change
+  while checking for extension, sigh)
+
+Version 0.2
+
+- The list of file extensions which will be served to the KiSS is no longer
+  hardcoded, but can be specified using -e ext1:ext2:....
+- .ogg extension added to the list of acceptable extensions.
+- Added security: files outside the paths specified will no longer be served.
+- Fixed a bug in the GET command (it would close the socket on wrong occasions);
+  this prevents the long delay after playing content.
+- Paths which are not configured will yield empty directories now.
+
+Version 0.1
+
+- Initial release
